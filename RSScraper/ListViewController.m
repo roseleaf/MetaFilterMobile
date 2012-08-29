@@ -50,6 +50,10 @@
 -(void) rssFetcher {
     //use restkit to grab the rss feed
     RKClient *client = [RKClient clientWithBaseURLString:@"http://news.ycombinator.com/"];
+//    NSXMLParser* xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://news.ycombinator.com/"]];
+//    xmlParser.delegate = self;
+//    [xmlParser parse];
+    
     client.requestQueue.requestTimeout = 10;
     client.cachePolicy = RKRequestCachePolicyNone;
     client.authenticationType = RKRequestAuthenticationTypeNone;
@@ -63,7 +67,7 @@
     if (request.method == RKRequestMethodGET) {
         id xmlParser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeXML];
         id parsedResponse = [xmlParser objectFromString:[response bodyAsString] error:nil];
-        
+        NSLog(@"%@", parsedResponse);
         NSDictionary* rss = parsedResponse;
         
         NSArray* rssChannelItemLevel = [[[rss valueForKey:@"rss"] valueForKey:@"channel"] valueForKey:@"item"];
