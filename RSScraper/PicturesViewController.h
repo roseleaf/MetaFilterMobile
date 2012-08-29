@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RssItem.h"
 
-@interface PicturesViewController : UIViewController <UIWebViewDelegate>
+@interface PicturesViewController : UIViewController <UIWebViewDelegate, NSURLConnectionDelegate>
 @property RssItem* rssItem;
 @property NSString* rssItemLink;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;

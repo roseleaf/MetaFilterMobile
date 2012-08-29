@@ -20,7 +20,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.webView.delegate = self;
-
+        
         NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString: self.rssItemLink]];
         NSLog(@"%@", self.rssItemLink);
         [self.webView loadRequest:requestObj];
@@ -33,6 +33,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self addBackButton];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString: self.rssItemLink]];
     NSLog(@"%@", self.rssItemLink);
     [self.webView loadRequest:requestObj];
@@ -46,8 +47,15 @@
     // e.g. self.myOutlet = nil;
 }
 
+-(void)addBackButton{
+    UIBarButtonItem* backButton = [[UIBarButtonItem alloc]initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(dismissSelf)];
+    self.navigationItem.leftBarButtonItem = backButton;
 
+}
 
+-(void)dismissSelf{
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

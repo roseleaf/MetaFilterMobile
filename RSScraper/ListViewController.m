@@ -53,12 +53,12 @@
 //    xmlParser.delegate = self;
 //    [xmlParser parse];
     
-    RKClient *client = [RKClient clientWithBaseURLString:@"http://feeds.feedburner.com/"];
+    RKClient *client = [RKClient clientWithBaseURLString:@"http://news.ycombinator.com/"];
     client.requestQueue.requestTimeout = 10;
     client.cachePolicy = RKRequestCachePolicyNone;
     client.authenticationType = RKRequestAuthenticationTypeNone;
     
-    [client get:@"Metafilter" delegate:self];
+    [client get:@"rss" delegate:self];
     
 }
 
@@ -108,20 +108,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     PicturesViewController* pvc = [PicturesViewController new];
     
-    
     pvc.rssItemLink = tempURL;
-    
-    
-    NSLog(@"In List View DidSelect!!!!!!!");
-    NSLog(@"%@", pvc.rssItemLink);
+    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:pvc];
+    navController s
 
-    NSDictionary* items = [NSDictionary dictionaryWithObjects:<#(NSArray *)#> forKeys:<#(NSArray *)#>;
-    [self presentModalViewController:pvc animated:YES];
+    [self presentModalViewController:navController animated:YES];
 }
-
-
-
-
 
 
 
@@ -131,6 +123,24 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (request.method == RKRequestMethodGET) {
     }
 }
+
+
+-(void)beginGettingImages{
+dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),
+               ^{
+                   //use NBProgressHUB to spin for a while when it is loading RSS
+                   //get the html document and images, use NSXMLParser and NSXMLDocument
+                   
+                   dispatch_async( dispatch_get_main_queue(), ^{ 
+
+                       //update view: add images to table view
+                       
+                       self;
+                   });
+                   
+               });
+}
+
 
 
 
