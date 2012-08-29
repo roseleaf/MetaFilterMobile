@@ -49,10 +49,6 @@
 
 -(void) rssFetcher {
     //use restkit to grab the rss feed
-//    NSXMLParser* xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://news.ycombinator.com/"]];
-//    xmlParser.delegate = self;
-//    [xmlParser parse];
-    
     RKClient *client = [RKClient clientWithBaseURLString:@"http://news.ycombinator.com/"];
     client.requestQueue.requestTimeout = 10;
     client.cachePolicy = RKRequestCachePolicyNone;
@@ -97,20 +93,11 @@
 }
 -(void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    PicturesViewController* pvc = [PicturesViewController new];
-//    
-//    NSDictionary* rssItem = [rssItemArray objectAtIndex:[indexPath row]];
-//    pvc.rssItemLink = [rssItem valueForKey:@"link"];
-    
-    
     NSDictionary* rssItem = [rssItemArray objectAtIndex:[indexPath row]];
     NSString *tempURL = [rssItem valueForKey:@"link"];
-    
+    UINavigationController *nc = [UINavigationController new];
     PicturesViewController* pvc = [PicturesViewController new];
-    
-    
     pvc.rssItemLink = tempURL;
-    
     
     NSLog(@"In List View DidSelect!!!!!!!");
     NSLog(@"%@", pvc.rssItemLink);
