@@ -53,12 +53,12 @@
 //    xmlParser.delegate = self;
 //    [xmlParser parse];
     
-    RKClient *client = [RKClient clientWithBaseURLString:@"http://news.ycombinator.com/"];
+    RKClient *client = [RKClient clientWithBaseURLString:@"http://feeds.feedburner.com/"];
     client.requestQueue.requestTimeout = 10;
     client.cachePolicy = RKRequestCachePolicyNone;
     client.authenticationType = RKRequestAuthenticationTypeNone;
     
-    [client get:@"rss" delegate:self];
+    [client get:@"Metafilter" delegate:self];
     
 }
 
@@ -67,7 +67,7 @@
     if (request.method == RKRequestMethodGET) {
         id xmlParser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeXML];
         id parsedResponse = [xmlParser objectFromString:[response bodyAsString] error:nil];
-        
+        NSLog(@"%@", parsedResponse);
         NSDictionary* rss = parsedResponse;
         
         NSArray* rssChannelItemLevel = [[[rss valueForKey:@"rss"] valueForKey:@"channel"] valueForKey:@"item"];
@@ -115,6 +115,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"In List View DidSelect!!!!!!!");
     NSLog(@"%@", pvc.rssItemLink);
 
+    NSDictionary* items = [NSDictionary dictionaryWithObjects:<#(NSArray *)#> forKeys:<#(NSArray *)#>;
     [self presentModalViewController:pvc animated:YES];
 }
 
