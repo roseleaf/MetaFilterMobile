@@ -67,7 +67,6 @@
     if (request.method == RKRequestMethodGET) {
         id xmlParser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeXML];
         id parsedResponse = [xmlParser objectFromString:[response bodyAsString] error:nil];
-        NSLog(@"%@", parsedResponse);
         NSDictionary* rss = parsedResponse;
         
         NSArray* rssChannelItemLevel = [[[rss valueForKey:@"rss"] valueForKey:@"channel"] valueForKey:@"item"];
@@ -87,6 +86,11 @@
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell* tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     RssItem* eachItem = [rssItemArray objectAtIndex:[indexPath row]];
+    [eachItem performBlockWithImages:^(UIImage* img){
+        eachItem.image = img;
+        tableViewCell.imageView.image = img;
+        [tableViewCell setNeedsLayout];
+    }];
     tableViewCell.textLabel.text = eachItem.title;
 
     return tableViewCell;
@@ -99,14 +103,10 @@
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary* rssItem = [rssItemArray objectAtIndex:[indexPath row]];
     NSString *tempURL = [rssItem valueForKey:@"link"];
-    UINavigationController *nc = [UINavigationController new];
     PicturesViewController* pvc = [PicturesViewController new];
     pvc.rssItemLink = tempURL;
-    
-    NSLog(@"In List View DidSelect!!!!!!!");
-    NSLog(@"%@", pvc.rssItemLink);
-
-    [self presentModalViewController:pvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:pvc];
+    [self presentModalViewController:navController animated:YES];
 }
 
 
