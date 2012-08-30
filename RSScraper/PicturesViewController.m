@@ -32,6 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addBackButton];
     // Do any additional setup after loading the view from its nib.
     [self addBackButton];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString: self.rssItemLink]];
@@ -50,7 +51,6 @@
 -(void)addBackButton{
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc]initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(dismissSelf)];
     self.navigationItem.leftBarButtonItem = backButton;
-
 }
 
 -(void)dismissSelf{

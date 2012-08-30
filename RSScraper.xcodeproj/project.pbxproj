@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251C32A415EEC3D600099134 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 251C32A315EEC3D600099134 /* libxml2.2.dylib */; };
+		251C32C015EEDD5200099134 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 251C32BF15EEDD5200099134 /* default.png */; };
 		9629189D15ED83B900AF18A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9629189C15ED83B900AF18A3 /* UIKit.framework */; };
 		9629189F15ED83B900AF18A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9629189E15ED83B900AF18A3 /* Foundation.framework */; };
 		962918A115ED83B900AF18A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962918A015ED83B900AF18A3 /* CoreGraphics.framework */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		251C32A315EEC3D600099134 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		251C32BF15EEDD5200099134 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		44A0AED96E074452AF2D865A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9629189815ED83B900AF18A3 /* RSScraper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSScraper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9629189C15ED83B900AF18A3 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -49,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				251C32A415EEC3D600099134 /* libxml2.2.dylib in Frameworks */,
 				9629189D15ED83B900AF18A3 /* UIKit.framework in Frameworks */,
 				9629189F15ED83B900AF18A3 /* Foundation.framework in Frameworks */,
 				962918A115ED83B900AF18A3 /* CoreGraphics.framework in Frameworks */,
@@ -80,6 +85,7 @@
 		9629189B15ED83B900AF18A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				251C32A315EEC3D600099134 /* libxml2.2.dylib */,
 				9629189C15ED83B900AF18A3 /* UIKit.framework */,
 				9629189E15ED83B900AF18A3 /* Foundation.framework */,
 				962918A015ED83B900AF18A3 /* CoreGraphics.framework */,
@@ -109,6 +115,7 @@
 		962918A315ED83B900AF18A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				251C32BF15EEDD5200099134 /* default.png */,
 				962918A415ED83B900AF18A3 /* RSScraper-Info.plist */,
 				962918A515ED83B900AF18A3 /* InfoPlist.strings */,
 				962918A815ED83B900AF18A3 /* main.m */,
@@ -172,6 +179,7 @@
 				962918A715ED83B900AF18A3 /* InfoPlist.strings in Resources */,
 				962918B715ED860600AF18A3 /* ListViewController.xib in Resources */,
 				96AE2B9B15EDA9E700F59075 /* PicturesViewController.xib in Resources */,
+				251C32C015EEDD5200099134 /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

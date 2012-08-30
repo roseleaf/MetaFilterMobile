@@ -49,11 +49,11 @@
 
 -(void) rssFetcher {
     //use restkit to grab the rss feed
+    RKClient *client = [RKClient clientWithBaseURLString:@"http://news.ycombinator.com/"];
 //    NSXMLParser* xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://news.ycombinator.com/"]];
 //    xmlParser.delegate = self;
 //    [xmlParser parse];
     
-    RKClient *client = [RKClient clientWithBaseURLString:@"http://news.ycombinator.com/"];
     client.requestQueue.requestTimeout = 10;
     client.cachePolicy = RKRequestCachePolicyNone;
     client.authenticationType = RKRequestAuthenticationTypeNone;
@@ -67,7 +67,6 @@
     if (request.method == RKRequestMethodGET) {
         id xmlParser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeXML];
         id parsedResponse = [xmlParser objectFromString:[response bodyAsString] error:nil];
-        NSLog(@"%@", parsedResponse);
         NSDictionary* rss = parsedResponse;
         
         NSArray* rssChannelItemLevel = [[[rss valueForKey:@"rss"] valueForKey:@"channel"] valueForKey:@"item"];
@@ -87,6 +86,11 @@
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell* tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     RssItem* eachItem = [rssItemArray objectAtIndex:[indexPath row]];
+    [eachItem performBlockWithImages:^(UIImage* img){
+        eachItem.image = img;
+        tableViewCell.imageView.image = img;
+        [tableViewCell setNeedsLayout];
+    }];
     tableViewCell.textLabel.text = eachItem.title;
 
     return tableViewCell;
@@ -97,21 +101,13 @@
 }
 -(void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    PicturesViewController* pvc = [PicturesViewController new];
-//    
-//    NSDictionary* rssItem = [rssItemArray objectAtIndex:[indexPath row]];
-//    pvc.rssItemLink = [rssItem valueForKey:@"link"];
-    
-    
     NSDictionary* rssItem = [rssItemArray objectAtIndex:[indexPath row]];
     NSString *tempURL = [rssItem valueForKey:@"link"];
-    
     PicturesViewController* pvc = [PicturesViewController new];
     
     pvc.rssItemLink = tempURL;
-    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:pvc];
-    navController s
-
+    pvc.rssItemLink = tempURL;
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:pvc];
     [self presentModalViewController:navController animated:YES];
 }
 
@@ -125,21 +121,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 
 
--(void)beginGettingImages{
-dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),
-               ^{
-                   //use NBProgressHUB to spin for a while when it is loading RSS
-                   //get the html document and images, use NSXMLParser and NSXMLDocument
-                   
-                   dispatch_async( dispatch_get_main_queue(), ^{ 
-
-                       //update view: add images to table view
-                       
-                       self;
-                   });
-                   
-               });
-}
 
 
 
