@@ -20,6 +20,13 @@
 		962918E715ED9D3D00AF18A3 /* RssItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 962918E615ED9D3D00AF18A3 /* RssItem.m */; };
 		96AE2B9A15EDA9E700F59075 /* PicturesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96AE2B9815EDA9E700F59075 /* PicturesViewController.m */; };
 		96AE2B9B15EDA9E700F59075 /* PicturesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AE2B9915EDA9E700F59075 /* PicturesViewController.xib */; };
+		96E94F2115FC860200EC8E0C /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E94F2015FC860200EC8E0C /* PostViewController.m */; };
+		96E94F2515FC891100EC8E0C /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E94F2415FC891100EC8E0C /* PostTableViewCell.m */; };
+		96E94F3D15FD169000EC8E0C /* PullToRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E94F3C15FD169000EC8E0C /* PullToRefreshTableViewController.m */; };
+		96E94F4015FD3DB100EC8E0C /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E94F3E15FD3DB100EC8E0C /* navbar.png */; };
+		96E94F4115FD3DB100EC8E0C /* comments.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E94F3F15FD3DB100EC8E0C /* comments.png */; };
+		96E94F4315FD3E1C00EC8E0C /* navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E94F4215FD3E1C00EC8E0C /* navbar@2x.png */; };
+		96E9501015FE590B00EC8E0C /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E9500F15FE590B00EC8E0C /* ContentViewController.m */; };
 		E5CB32968F4940F38F35C5C1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A0AED96E074452AF2D865A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +52,17 @@
 		96AE2B9715EDA9E700F59075 /* PicturesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicturesViewController.h; sourceTree = "<group>"; };
 		96AE2B9815EDA9E700F59075 /* PicturesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicturesViewController.m; sourceTree = "<group>"; };
 		96AE2B9915EDA9E700F59075 /* PicturesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PicturesViewController.xib; sourceTree = "<group>"; };
+		96E94F1F15FC860200EC8E0C /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
+		96E94F2015FC860200EC8E0C /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
+		96E94F2315FC891100EC8E0C /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
+		96E94F2415FC891100EC8E0C /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewCell.m; sourceTree = "<group>"; };
+		96E94F3B15FD169000EC8E0C /* PullToRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshTableViewController.h; sourceTree = "<group>"; };
+		96E94F3C15FD169000EC8E0C /* PullToRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshTableViewController.m; sourceTree = "<group>"; };
+		96E94F3E15FD3DB100EC8E0C /* navbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar.png; sourceTree = "<group>"; };
+		96E94F3F15FD3DB100EC8E0C /* comments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comments.png; sourceTree = "<group>"; };
+		96E94F4215FD3E1C00EC8E0C /* navbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar@2x.png"; sourceTree = "<group>"; };
+		96E9500E15FE590B00EC8E0C /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		96E9500F15FE590B00EC8E0C /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		AC41F36B1B3C4456920AB5EA /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -97,13 +115,21 @@
 		962918A215ED83B900AF18A3 /* RSScraper */ = {
 			isa = PBXGroup;
 			children = (
+				96E94F3B15FD169000EC8E0C /* PullToRefreshTableViewController.h */,
+				96E94F3C15FD169000EC8E0C /* PullToRefreshTableViewController.m */,
+				962918B315ED860600AF18A3 /* ListViewController.h */,
+				962918B415ED860600AF18A3 /* ListViewController.m */,
+				96E94F2315FC891100EC8E0C /* PostTableViewCell.h */,
+				96E94F2415FC891100EC8E0C /* PostTableViewCell.m */,
+				96E94F1F15FC860200EC8E0C /* PostViewController.h */,
+				96E94F2015FC860200EC8E0C /* PostViewController.m */,
 				96AE2B9715EDA9E700F59075 /* PicturesViewController.h */,
 				96AE2B9815EDA9E700F59075 /* PicturesViewController.m */,
 				96AE2B9915EDA9E700F59075 /* PicturesViewController.xib */,
+				96E9500E15FE590B00EC8E0C /* ContentViewController.h */,
+				96E9500F15FE590B00EC8E0C /* ContentViewController.m */,
 				962918AB15ED83B900AF18A3 /* AppDelegate.h */,
 				962918AC15ED83B900AF18A3 /* AppDelegate.m */,
-				962918B315ED860600AF18A3 /* ListViewController.h */,
-				962918B415ED860600AF18A3 /* ListViewController.m */,
 				962918B515ED860600AF18A3 /* ListViewController.xib */,
 				962918E515ED9D3D00AF18A3 /* RssItem.h */,
 				962918E615ED9D3D00AF18A3 /* RssItem.m */,
@@ -115,6 +141,9 @@
 		962918A315ED83B900AF18A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				96E94F3E15FD3DB100EC8E0C /* navbar.png */,
+				96E94F3F15FD3DB100EC8E0C /* comments.png */,
+				96E94F4215FD3E1C00EC8E0C /* navbar@2x.png */,
 				251C32BF15EEDD5200099134 /* default.png */,
 				962918A415ED83B900AF18A3 /* RSScraper-Info.plist */,
 				962918A515ED83B900AF18A3 /* InfoPlist.strings */,
@@ -180,6 +209,9 @@
 				962918B715ED860600AF18A3 /* ListViewController.xib in Resources */,
 				96AE2B9B15EDA9E700F59075 /* PicturesViewController.xib in Resources */,
 				251C32C015EEDD5200099134 /* default.png in Resources */,
+				96E94F4015FD3DB100EC8E0C /* navbar.png in Resources */,
+				96E94F4115FD3DB100EC8E0C /* comments.png in Resources */,
+				96E94F4315FD3E1C00EC8E0C /* navbar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +244,10 @@
 				962918B615ED860600AF18A3 /* ListViewController.m in Sources */,
 				962918E715ED9D3D00AF18A3 /* RssItem.m in Sources */,
 				96AE2B9A15EDA9E700F59075 /* PicturesViewController.m in Sources */,
+				96E94F2115FC860200EC8E0C /* PostViewController.m in Sources */,
+				96E94F2515FC891100EC8E0C /* PostTableViewCell.m in Sources */,
+				96E94F3D15FD169000EC8E0C /* PullToRefreshTableViewController.m in Sources */,
+				96E9501015FE590B00EC8E0C /* ContentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

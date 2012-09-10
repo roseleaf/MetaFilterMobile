@@ -11,6 +11,9 @@
 @interface RssItem : NSObject
 @property (strong) NSString* title;
 @property (strong) NSString* link;
+@property (strong) NSString* linkDescription;
+@property (strong) NSString* textOnlyDesc;
 @property (strong) UIImage* image;
+@property (strong) NSString* creator;
 -(void)performBlockWithImages:(void (^)(UIImage*)) block;
 @end

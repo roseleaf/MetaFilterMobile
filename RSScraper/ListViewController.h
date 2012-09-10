@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PullToRefreshTableViewController.h"
 
-@interface ListViewController : UIViewController
+@interface ListViewController : PullToRefreshTableViewController
 @property (weak, nonatomic) IBOutlet UITableView *rSSTable;
-
+@property(strong)UIImageView* header;
+@property (strong, nonatomic) IBOutlet UIImageView *screenShotImageView;
+@property (strong, nonatomic) UIImage *screenShotImage;
 @end
     

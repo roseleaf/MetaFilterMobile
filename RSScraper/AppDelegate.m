@@ -15,12 +15,41 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    ListViewController* lvc = [ListViewController new];
-    self.window.rootViewController = lvc;
+    
+    self.menuViewController = [PostViewController new];
+    //LogoExpanding is equal to listViewController
+    self.contentViewController = [[ListViewController alloc] init];
+    
+    
+    
+    
+//    ListViewController* lvc = [ListViewController new];
+    self.window.rootViewController = self.contentViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
 
+-(void)showSideMenu
+{
+    // before swaping the views, we'll take a "screenshot" of the current view
+    // by rendering its CALayer into the an ImageContext then saving that off to a UIImage
+    CGSize viewSize = self.contentViewController.view.bounds.size;
+    UIGraphicsBeginImageContextWithOptions(viewSize, NO, 1.0);
+    [self.contentViewController.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    // Read the UIImage object
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // pass this image off to the MenuViewController then swap it in as the rootViewController
+//    self.menuViewController.screenShotImage = image;
+    self.window.rootViewController = self.menuViewController;
+}
 
+-(void)hideSideMenu
+{
+    // all animation takes place elsewhere. When this gets called just swap the contentViewController in
+    self.window.rootViewController = self.contentViewController;
+}
 @end

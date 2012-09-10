@@ -10,6 +10,8 @@
 #import <RestKit/RestKit.h>
 #import "RssItem.h"
 #import "PicturesViewController.h"
+#import "PostTableViewCell.h"
+#import "PostViewController.h"
 
 @interface ListViewController () <UITableViewDelegate, UITableViewDataSource, NSURLConnectionDelegate, RKRequestDelegate, NSXMLParserDelegate>{
     NSMutableArray* rssItemArray;
@@ -26,39 +28,115 @@
         rssItemArray = [NSMutableArray new];
         [self rssFetcher];
     }
+
+    
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.rSSTable.delegate = self;
-    self.rSSTable.dataSource = self;
+
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = 146;
     
 }
 
-- (void)viewDidUnload
-{
-    [self setRSSTable:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
+//Set up TableView Header:
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 50;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    self.header = [UIImageView new];
+    self.header.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"navbar.png"]];
+    self.header.frame = CGRectMake(0, 0, self.view.bounds.size.width, 50);
+    [self.view addSubview:self.header];
+    UILabel *headerLabel =
+    [[UILabel alloc]
+     initWithFrame:CGRectMake(120, 15, 300, 29)];
+    headerLabel.text = NSLocalizedString(@"Recent", @"");
+    headerLabel.textColor = [UIColor colorWithRed:187 green:169 blue:171 alpha:1.0];
+    headerLabel.shadowColor = [UIColor blackColor];
+    headerLabel.shadowOffset = CGSizeMake(0, -1);
+    headerLabel.font = [UIFont boldSystemFontOfSize:20];
+    headerLabel.backgroundColor = [UIColor clearColor];
+    
+    
+    // Create header view and add label as a subview
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, 30)];
+    [view addSubview:self.header];
+    [view addSubview:headerLabel];
+    
+    return view;
+}
+
+
+//TableView Delegate Methods:
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    RssItem* eachItem = [rssItemArray objectAtIndex:[indexPath row]];
+    
+    static NSString *CellIdentifier = @"Cell";
+    PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[PostTableViewCell alloc]init];
+    }
+    
+    //    [eachItem performBlockWithImages:^(UIImage* img){
+    //        eachItem.image = img;
+    //        tableViewCell.imageView.image = img;
+    //        [tableViewCell setNeedsLayout];
+    //    }];
+    
+    
+    NSString *string = eachItem.linkDescription;
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<.*?>" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *modifiedString = [regex stringByReplacingMatchesInString:string options:0 range:NSMakeRange(0, [string length]) withTemplate:@" "];
+        
+    eachItem.textOnlyDesc = modifiedString;
+    cell.primaryLabel.text = modifiedString;
+
+    cell.primaryLabel.font = [UIFont fontWithName:@"helvetica" size:13];
+    cell.postedByLabel.text = [NSString stringWithFormat:@"Posted by: %@", eachItem.creator];
+    cell.postedByLabel.font = [UIFont systemFontOfSize:12];
+    
+    return cell;
+}
+
+-(int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [rssItemArray count];
+}
+
+-(void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary* rssItem = [rssItemArray objectAtIndex:[indexPath row]];
+    //NSString *tempURL = [rssItem valueForKey:@"link"];
+    //PicturesViewController* pvc = [PicturesViewController new];
+    //    pvc.rssItemLink = tempURL;
+    PostViewController* pvc = [PostViewController new];
+    pvc.rssItem = rssItem;
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:pvc];
+    [self presentModalViewController:navController animated:YES];
 }
 
 
 
+
+
+//use restkit to grab the rss feed
 -(void) rssFetcher {
-    //use restkit to grab the rss feed
-    RKClient *client = [RKClient clientWithBaseURLString:@"http://news.ycombinator.com/"];
-//    NSXMLParser* xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://news.ycombinator.com/"]];
-//    xmlParser.delegate = self;
-//    [xmlParser parse];
+    RKClient *client = [RKClient clientWithBaseURLString:@"http://feeds.feedburner.com/"];
     
     client.requestQueue.requestTimeout = 10;
     client.cachePolicy = RKRequestCachePolicyNone;
     client.authenticationType = RKRequestAuthenticationTypeNone;
     
-    [client get:@"rss" delegate:self];
+    [client get:@"Metafilter" delegate:self];
     
 }
 
@@ -72,44 +150,19 @@
         NSArray* rssChannelItemLevel = [[[rss valueForKey:@"rss"] valueForKey:@"channel"] valueForKey:@"item"];
         for (NSDictionary* itemDictionary in rssChannelItemLevel){
             RssItem* item = [RssItem new];
+            item.linkDescription = [itemDictionary valueForKey:@"description"];
             item.title = [itemDictionary valueForKey:@"title"];
             item.link = [itemDictionary valueForKey:@"link"];
             [rssItemArray addObject:item];
+            item.creator = [itemDictionary valueForKey:@"dc:creator"];
 
         }
-        [self.rSSTable reloadData];
+
+        [self.tableView reloadData];
     }
 }
 
 
-
--(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell* tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    RssItem* eachItem = [rssItemArray objectAtIndex:[indexPath row]];
-    [eachItem performBlockWithImages:^(UIImage* img){
-        eachItem.image = img;
-        tableViewCell.imageView.image = img;
-        [tableViewCell setNeedsLayout];
-    }];
-    tableViewCell.textLabel.text = eachItem.title;
-
-    return tableViewCell;
-}
-
--(int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [rssItemArray count];
-}
--(void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary* rssItem = [rssItemArray objectAtIndex:[indexPath row]];
-    NSString *tempURL = [rssItem valueForKey:@"link"];
-    PicturesViewController* pvc = [PicturesViewController new];
-    
-    pvc.rssItemLink = tempURL;
-    pvc.rssItemLink = tempURL;
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:pvc];
-    [self presentModalViewController:navController animated:YES];
-}
 
 
 
@@ -120,6 +173,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     }
 }
 
+-(void)refresh{
+    [self rssFetcher];
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
+
+}
 
 
 

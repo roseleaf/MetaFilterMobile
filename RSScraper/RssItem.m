@@ -49,7 +49,6 @@
         TFHppleElement *element = [elements objectAtIndex:0];
         //NSString *srcString = [element objectForKey:@"src"]; //grab image src
         NSString *srcString = [element objectForKey:@"href"]; //grab favicon src
-
         
         NSURL *url = [NSURL URLWithString:srcString];
         NSData *srcData = [NSData dataWithContentsOfURL:url];
