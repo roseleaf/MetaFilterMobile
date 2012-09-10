@@ -16,7 +16,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    self.menuViewController = [PostViewController new];
     //LogoExpanding is equal to listViewController
     self.contentViewController = [[ListViewController alloc] init];
     
@@ -30,10 +29,11 @@
     return YES;
 }
 
--(void)showSideMenu
+-(void)showSideMenuWithView:(PostViewController*)view
 {
     // before swaping the views, we'll take a "screenshot" of the current view
     // by rendering its CALayer into the an ImageContext then saving that off to a UIImage
+
     CGSize viewSize = self.contentViewController.view.bounds.size;
     UIGraphicsBeginImageContextWithOptions(viewSize, NO, 1.0);
     [self.contentViewController.view.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -43,8 +43,11 @@
     UIGraphicsEndImageContext();
     
     // pass this image off to the MenuViewController then swap it in as the rootViewController
-//    self.menuViewController.screenShotImage = image;
-    self.window.rootViewController = self.menuViewController;
+    self.postViewController = view;
+
+    self.postViewController.screenShotImage = image;
+    self.window.rootViewController = self.postViewController;
+
 }
 
 -(void)hideSideMenu

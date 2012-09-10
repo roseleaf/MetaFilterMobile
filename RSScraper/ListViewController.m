@@ -12,6 +12,7 @@
 #import "PicturesViewController.h"
 #import "PostTableViewCell.h"
 #import "PostViewController.h"
+#import "AppDelegate.h"
 
 @interface ListViewController () <UITableViewDelegate, UITableViewDataSource, NSURLConnectionDelegate, RKRequestDelegate, NSXMLParserDelegate>{
     NSMutableArray* rssItemArray;
@@ -122,6 +123,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     pvc.rssItem = rssItem;
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:pvc];
     [self presentModalViewController:navController animated:YES];
+    [pvc slideThenHide];
+    //[app_delegate showSideMenuWithView:pvc];
+
 }
 
 

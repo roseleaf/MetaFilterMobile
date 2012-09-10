@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "PostViewController.h"
 #import "ListViewController.h"
 #import "ContentViewController.h"
+#import "PostViewController.h"
+
+#define app_delegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+@class PostViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-@property (strong, nonatomic) ContentViewController *contentViewController;
-@property (strong, nonatomic) PostViewController *menuViewController;
+@property (strong, nonatomic) ListViewController *contentViewController;
+@property (strong, nonatomic) PostViewController* postViewController;
+
 @property (strong, nonatomic) UIWindow *window;
--(void)showSideMenu;
+-(void)showSideMenuWithView:(PostViewController*)view;
 -(void)hideSideMenu;
 @end
